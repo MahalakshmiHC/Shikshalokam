@@ -1,0 +1,27 @@
+def modify_string(s):
+    result = []
+
+    for i in range(len(s)):
+        ascii_val = ord(s[i])
+
+        if i > 0 and ascii_val % 2 == 1 and not result[i - 1].isnumeric():
+            modified_char = chr((ascii_val - (ascii_val % 5)) % 128)
+            result.append(modified_char)
+        elif i < len(s) - 1 and ascii_val % 2 == 0 and not s[i + 1].isnumeric():
+            modified_char = chr((ascii_val + (ascii_val % 7)) % 128)
+            result.append(modified_char)
+        else:
+            result.append(s[i])
+
+    return ''.join(result)
+
+# Example usage
+s = "sHQen}"
+print("Original string:", s)
+
+for idx, char in enumerate(s):
+    print(f"\nPass {idx + 1} ({ord(char)}):", end=' ')
+    s = modify_string(s)
+    print(s)
+
+print("\nFinal Answer:", s)
